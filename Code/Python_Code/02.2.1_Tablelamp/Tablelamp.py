@@ -6,6 +6,8 @@
 # modification: 2019/12/28
 ########################################################################
 import RPi.GPIO as GPIO
+import time
+import random
 
 ledPin = 11       # define ledPin
 buttonPin = 12    # define buttonPin
@@ -30,7 +32,11 @@ def loop():
     #Button detect 
     GPIO.add_event_detect(buttonPin,GPIO.FALLING,callback = buttonEvent,bouncetime=300)
     while True:
-        pass
+        if ledState:
+            GPIO.output(ledPin, GPIO.LOW)
+            time.sleep((random.random() * 0.05))
+            GPIO.output(ledPin, ledState)
+            time.sleep((random.random() * 0.5 + 0.1))
                 
 def destroy():
     GPIO.cleanup()                     # Release GPIO resource

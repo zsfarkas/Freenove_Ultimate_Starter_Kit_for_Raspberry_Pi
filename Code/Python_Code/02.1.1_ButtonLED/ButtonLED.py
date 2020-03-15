@@ -6,6 +6,7 @@
 # modification: 2019/12/28
 ########################################################################
 import RPi.GPIO as GPIO
+import time
 
 ledPin = 11    # define ledPin
 buttonPin = 12    # define buttonPin
@@ -18,7 +19,11 @@ def setup():
 
 def loop():
     while True:
-        if GPIO.input(buttonPin)==GPIO.LOW: # if button is pressed
+        if GPIO.input(buttonPin)==GPIO.HIGH: # if button is pressed
+            GPIO.output(ledPin,GPIO.HIGH)   # turn on led
+            time.sleep(0.1)
+            GPIO.output(ledPin,GPIO.LOW)   # turn on led
+            time.sleep(0.1)
             GPIO.output(ledPin,GPIO.HIGH)   # turn on led
             print ('led turned on >>>')     # print information on terminal
         else : # if button is relessed
